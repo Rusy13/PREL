@@ -6,13 +6,14 @@ def validate_date(start_year, start_month, start_day)
   @y = start_year
   @m = start_month
   @d = start_day
-  @data = Date.new(@y, @m, @d)
-  @sdv = @d
   if Date.valid_date?(@y, @m, @d) 
     puts "дата в норме #{@y} #{@m} #{@d} "
   else
-    puts "дата в не в норме"
+    abort "дата не в норме"
   end
+  @data = Date.new(@y, @m, @d)
+  @sdv = @d
+
 end
 
 def validate_period(input1)
@@ -20,7 +21,7 @@ def validate_period(input1)
   if input1 =~ reg
     puts "Входные данные корректны"
   else
-    puts "Ошибка: входные данные содержат недопустимые символы"
+    abort "Ошибка: входные данные содержат недопустимые символы"
   end
 end
 
@@ -49,6 +50,7 @@ def prohod(array)
     end
   end
 end
+
 
 def year(input1)
   @y = @data.year
@@ -113,7 +115,6 @@ def month(input1)
       @f = 1
       puts ("Ошибка month")
     end
-    puts("---------------------")
   end
 end
 
@@ -167,8 +168,10 @@ def main()
   validate_date(@start_year,@start_month,@start_day)
   prohod(periods)
   if @f == 0
+    puts('------------------------------------')
     puts(true)
   else
+    puts('------------------------------------')
     puts(false)
   end
 end
